@@ -25,11 +25,11 @@ public class ioSampleTest {
     @BeforeMethod
     public void setup () throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability(MobileCapabilityType.BROWSER_NAME, "Browser");
-        caps.setCapability("deviceName", "Galaxy Nexus API 24");
+        // caps.setCapability(MobileCapabilityType.BROWSER_NAME, "Browser");
+        caps.setCapability("deviceName", "Nexus 5X API 29 x86");
         caps.setCapability("udid", "emulator-5554"); //DeviceId from "adb devices" command
         caps.setCapability("platformName", "Android");
-        caps.setCapability("platformVersion", "7.0");
+        caps.setCapability("platformVersion", "10.0");
         caps.setCapability("skipUnlock","true");
         //caps.setCapability("app", "/data/app/com.vector.guru-UaGV0XWqlHBEOAXB9ZGDjg==/...");
         caps.setCapability("appPackage", "com.vector.guru99");
@@ -42,7 +42,7 @@ public class ioSampleTest {
         } catch (MalformedURLException e) {
             System.out.println(e.getMessage());
         }
-       // driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"),caps);
+        driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"),caps);
         wait = new WebDriverWait(driver, 10);
     }
 
@@ -51,17 +51,9 @@ public class ioSampleTest {
     public void basicTest () throws InterruptedException {
         //Click and pass Splash
         wait.until(ExpectedConditions.visibilityOfElementLocated
-                (By.id("com.isinolsun.app:id/animation_view"))).click();
-
-        //Click I am searching a job
-        wait.until(ExpectedConditions.visibilityOfElementLocated
-                (By.id("com.isinolsun.app:id/bluecollar_type_button"))).click();
+                (By.id("com.android.permissioncontroller:id/continue_button"))).click();
 
 
-        //Notification Allow
-        if (driver.findElements(By.id("com.android.packageinstaller:id/permission_allow_button")).size()>0) {
-            driver.findElements(By.id("com.android.packageinstaller:id/permission_allow_button")).get(0).click();
-        }
 
         wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.xpath(secondNewJob)));
@@ -72,3 +64,4 @@ public class ioSampleTest {
         driver.quit();
     }
 }
+
